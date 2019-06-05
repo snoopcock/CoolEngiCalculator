@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">CoolCalculator</string>
+    <string name="title_activity_engi_calc">EngiCalcActivity</string>
+    <string name="title_activity_graph">GraphActivity</string>
+</resources>
