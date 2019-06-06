@@ -55,8 +55,8 @@ class EngiCalcActivity : AppCompatActivity() {
             tvTg.setOnClickListener { appendOnExpression("tan(", true) }
         if(tvCtg != null)
             tvCtg.setOnClickListener { appendOnExpression("cot(", true) }
-        if(tvArcCtg != null)
-            tvArcCtg.setOnClickListener { appendOnExpression("acot(", true) }
+        if(tvArcСtg != null)
+            tvArcСtg.setOnClickListener { appendOnExpression("acot(", true) }
         if(tvSin != null)
             tvSin.setOnClickListener { appendOnExpression("sin(", true) }
         if(tvCos != null)
