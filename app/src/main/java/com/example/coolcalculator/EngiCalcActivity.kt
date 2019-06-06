@@ -42,19 +42,34 @@ class EngiCalcActivity : AppCompatActivity() {
         if(tvComma != null)
             tvComma.setOnClickListener { appendOnExpression(",", false) }
         if(tvSqrtXY != null)
-            tvSqrtXY.setOnClickListener { appendOnExpression("sqrt", true) }
+            tvSqrtXY.setOnClickListener { appendOnExpression("sqrt(", true) }
         if(tvLog != null)
-            tvLog.setOnClickListener { appendOnExpression("log", true) }
+            tvLog.setOnClickListener { appendOnExpression("log(", true) }
         if(tvArcSin != null)
-            tvArcSin.setOnClickListener { appendOnExpression("asin", true) }
+            tvArcSin.setOnClickListener { appendOnExpression("asin(", true) }
         if(tvArcCos != null)
-            tvArcCos.setOnClickListener { appendOnExpression("acos", true) }
+            tvArcCos.setOnClickListener { appendOnExpression("acos(", true) }
+        if(tvArcTg != null)
+            tvArcTg.setOnClickListener { appendOnExpression("atan(", true) }
+        if(tvTg != null)
+            tvTg.setOnClickListener { appendOnExpression("tan(", true) }
+        if(tvCtg != null)
+            tvCtg.setOnClickListener { appendOnExpression("cot(", true) }
+        if(tvArcCtg != null)
+            tvArcCtg.setOnClickListener { appendOnExpression("acot(", true) }
+        if(tvSin != null)
+            tvSin.setOnClickListener { appendOnExpression("sin(", true) }
+        if(tvCos != null)
+            tvCos.setOnClickListener { appendOnExpression("cos(", true) }
+        if(tvPi != null)
+            tvPi.setOnClickListener{appendOnExpression("pi", true)}
 
         if(tvPer != null)
             tvPer.setOnClickListener {
+                if(isException) return@setOnClickListener
                 var n : Int = tvExpression.text.length
                 if(n == 0) return@setOnClickListener
-                if(tvExpression.text[n - 1] == '.') tvExpression.text = tvExpression.text.substring(0, n - 1)
+                if(tvExpression.text[n - 1] == '.' || tvExpression.text[n - 1] == '(') return@setOnClickListener
                 if(isOper(tvExpression.text[n - 1].toString())) tvExpression.text = tvExpression.text.substring(0, n - 1)
                 tvExpression.text = "0.01(" + tvExpression.text + ")"
             }
@@ -99,9 +114,17 @@ class EngiCalcActivity : AppCompatActivity() {
                 tvExpression.text = ""
                 isException = false
             }
-            val string = tvExpression.text.toString()
-            if(string.isNotEmpty()){
-                tvExpression.text = string.substring(0, string.length-1)
+            val n : Int = tvExpression.text.length
+            if(n > 1 && tvExpression.text[n - 1] == '(' && tvExpression.text[n - 2] in 'a'..'z' && tvExpression.text[n - 2] != 'i'){
+                tvExpression.text = tvExpression.text.substring(0, tvExpression.text.length - 1)
+                while (tvExpression.text.length > 0 && tvExpression.text[tvExpression.text.length - 1] in 'a'..'z')
+                    tvExpression.text = tvExpression.text.substring(0, tvExpression.text.length - 1)
+            }
+            else if(n > 1 && tvExpression.text[n - 1] == 'i'){
+                tvExpression.text = tvExpression.text.substring(0, tvExpression.text.length - 2)
+            }
+            else if(tvExpression.text.isNotEmpty()){
+                tvExpression.text = tvExpression.text.substring(0, tvExpression.text.length-1)
             }
             isDbl = false
             for(i in (tvExpression.text.length - 1) downTo 0){
@@ -116,14 +139,14 @@ class EngiCalcActivity : AppCompatActivity() {
         tvEquals.setOnClickListener{
             try {
 
-                val expression = ExpressionBuilder(tvExpression.text.toString()).function(sqrt).function(log).operator(factorial).build()
+                val expression = ExpressionBuilder(tvExpression.text.toString()).function(sqrt).function(log).function(cot).function(acot).operator(factorial).build()
                 val result = expression.evaluate()
                 val longResult = result.toLong()
                 if(result == longResult.toDouble())
                     tvResult.text = longResult.toString()
                 else
                     tvResult.text = result.toString()
-
+                if(tvResult.text == "NaN") throw IllegalArgumentException("Bad Argument")
 
             } catch (e:Exception){
                 if(isException){
@@ -160,6 +183,18 @@ class EngiCalcActivity : AppCompatActivity() {
     var log = object : Function("log", 2) {
         override fun apply(vararg args: Double): Double {
             return Math.log(args[0]) / Math.log(args[1])
+        }
+    }
+
+    var cot = object : Function("cot",  1){
+        override fun apply(vararg args : Double) : Double {
+            return 1 / Math.tan(args[0] * Math.PI / 180)
+        }
+    }
+
+    var acot = object : Function("acot", 1){
+        override fun apply(vararg args : Double) : Double{
+            return Math.atan(-args[0]) + Math.PI / 2
         }
     }
 
@@ -221,6 +256,42 @@ class EngiCalcActivity : AppCompatActivity() {
         if(n == 0 && string != "-" && isOper(string))
             return
 
+        if(n > 0 && tvExpression.text[n - 1] == '(' && isOper(string))
+            return
+
+        if(string == ","){
+            if(n == 0) return
+            if(tvExpression.text[n - 1] == '.' || tvExpression.text[n - 1] == '(' || isOper(tvExpression.text[n - 1].toString())) return
+            var ind : Int = -1
+            var bal : Int = 0
+            var cnt : Int = 0
+            for(i in (n - 1) downTo 0){
+                if(tvExpression.text[i] == '(' && bal == 0){
+                    ind = i
+                    break
+                }
+                if(tvExpression.text[i] == ',' && bal == 0){
+                    cnt++
+                }
+                if(tvExpression.text[i] == ')')
+                    bal--
+                if(tvExpression.text[i] == '(')
+                    bal++
+            }
+            if(ind <= 0 || !(tvExpression.text[ind - 1] in 'a'..'z') || tvExpression.text[ind - 1] == 'i') return
+            var arg : String = ""
+            ind--
+            while(ind >= 0 && tvExpression.text[ind] in 'a'..'z'){
+                arg = tvExpression.text[ind] + arg
+                ind--
+            }
+            if(cnt >= 1) return
+            when(arg){
+                "asin", "acos", "atan", "tan", "cot", "acot", "sin", "cos" -> return
+                else -> {}
+            }
+        }
+
         if(isDbl && string == ".")
             return
 
@@ -239,6 +310,9 @@ class EngiCalcActivity : AppCompatActivity() {
             if (n == 1) return
             tvExpression.text = tvExpression.text.substring(0, n - 1)
         }
+
+        if(n > 0 && string.length > 1 && tvExpression.text[n - 1] == 'i') tvExpression.append("*")
+
         if(string == ".") isDbl = true
         else if(!(string in "0".."9")) isDbl = false
 
