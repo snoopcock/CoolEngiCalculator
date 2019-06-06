@@ -122,7 +122,7 @@ class EngiCalcActivity : AppCompatActivity() {
             return
         }
 
-        if(n == 0 && isOper(string))
+        if(n == 0 && string != "-" && isOper(string))
             return
 
         if(isDbl && string == ".")
@@ -135,11 +135,14 @@ class EngiCalcActivity : AppCompatActivity() {
         if(string == "." && (n == 0 || !(tvExpression.text[n - 1] in '0'..'9')))
             return
 
-        if(n > 0 && isOper(tvExpression.text[n - 1].toString()) && isOper(string))
+        if(n > 0 && isOper(tvExpression.text[n - 1].toString()) && isOper(string)) {
+            if(n == 1) return
             tvExpression.text = tvExpression.text.substring(0, n - 1)
-        else if(n > 0 && tvExpression.text[n - 1] == '.' && !(string in "0".."9"))
+        }
+        else if(n > 0 && tvExpression.text[n - 1] == '.' && !(string in "0".."9")) {
+            if (n == 1) return
             tvExpression.text = tvExpression.text.substring(0, n - 1)
-
+        }
         if(string == ".") isDbl = true
         else if(!(string in "0".."9")) isDbl = false
 
