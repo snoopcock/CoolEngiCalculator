@@ -163,7 +163,7 @@
                     style="@style/EngiButtonStyle"
                     android:text="ctg"/>
             <TextView
-                    android:id="@+id/tvPi"
+                    android:id="@+id/tvArcctg"
                     style="@style/EngiButtonStyle"
                     android:text="arcctg"/>
 
