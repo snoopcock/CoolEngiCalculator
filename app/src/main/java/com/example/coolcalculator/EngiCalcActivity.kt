@@ -2,10 +2,13 @@ package com.example.coolcalculator
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
 import kotlinx.android.synthetic.main.activity_engi_calc.*
 import net.objecthunter.exp4j.ExpressionBuilder
+import net.objecthunter.exp4j.function.Function
+import net.objecthunter.exp4j.operator.Operator
+
+
 
 class EngiCalcActivity : AppCompatActivity() {
 
@@ -31,6 +34,30 @@ class EngiCalcActivity : AppCompatActivity() {
         tvResult.text = savedInstanceState.getString("RES")
         isException = savedInstanceState.getBoolean("EXC")
         isDbl = savedInstanceState.getBoolean("DB")
+
+        if(tvFact != null)
+            tvFact.setOnClickListener { appendOnExpression("!", false) }
+        if(tvPow != null)
+            tvPow.setOnClickListener{appendOnExpression("^", false)}
+        if(tvComma != null)
+            tvComma.setOnClickListener { appendOnExpression(",", false) }
+        if(tvSqrtXY != null)
+            tvSqrtXY.setOnClickListener { appendOnExpression("sqrt", true) }
+        if(tvLog != null)
+            tvLog.setOnClickListener { appendOnExpression("log", true) }
+        if(tvArcSin != null)
+            tvArcSin.setOnClickListener { appendOnExpression("asin", true) }
+        if(tvArcCos != null)
+            tvArcCos.setOnClickListener { appendOnExpression("acos", true) }
+
+        if(tvPer != null)
+            tvPer.setOnClickListener {
+                var n : Int = tvExpression.text.length
+                if(n == 0) return@setOnClickListener
+                if(tvExpression.text[n - 1] == '.') tvExpression.text = tvExpression.text.substring(0, n - 1)
+                if(isOper(tvExpression.text[n - 1].toString())) tvExpression.text = tvExpression.text.substring(0, n - 1)
+                tvExpression.text = "0.01(" + tvExpression.text + ")"
+            }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +65,8 @@ class EngiCalcActivity : AppCompatActivity() {
         setContentView(R.layout.activity_engi_calc)
 
         getSupportActionBar()!!.hide()
+
+        Log.d("MainChecker: ", "Everything fine in EngiCalcActivity")
 
         tvOne.setOnClickListener {appendOnExpression("1",true)}
         tvTwo.setOnClickListener {appendOnExpression("2",true)}
@@ -87,7 +116,7 @@ class EngiCalcActivity : AppCompatActivity() {
         tvEquals.setOnClickListener{
             try {
 
-                val expression = ExpressionBuilder(tvExpression.text.toString()).build()
+                val expression = ExpressionBuilder(tvExpression.text.toString()).function(sqrt).function(log).operator(factorial).build()
                 val result = expression.evaluate()
                 val longResult = result.toLong()
                 if(result == longResult.toDouble())
@@ -111,9 +140,54 @@ class EngiCalcActivity : AppCompatActivity() {
         }
 
     }
+    //--------------------------------------------------------------------------------------------------
+    //************************Additional functions and operators****************************************
+    //--------------------------------------------------------------------------------------------------
+
+    var sqrt = object: Function("sqrt", 2){
+        override fun apply(vararg args : Double) : Double{
+            when(args[1]){
+                2.0 -> return Math.sqrt(args[0])
+                3.0 -> return Math.cbrt(args[0])
+                else -> {
+                    if(args[0] < 0 && args[1].toInt() % 2 == 1) throw IllegalArgumentException("Bad Argument")
+                    return Math.pow(args[0], 1 / args[1])
+                }
+            }
+        }
+    }
+
+    var log = object : Function("log", 2) {
+        override fun apply(vararg args: Double): Double {
+            return Math.log(args[0]) / Math.log(args[1])
+        }
+    }
+
+    var factorial: Operator = object : Operator("!", 1, true, Operator.PRECEDENCE_POWER + 1) {
+
+        override fun apply(vararg args: Double): Double {
+            val arg = args[0].toInt()
+            if (arg.toDouble() != args[0]) {
+                throw IllegalArgumentException("Operand for factorial has to be an integer")
+            }
+            if (arg < 0) {
+                throw IllegalArgumentException("The operand of the factorial can not be less than zero")
+            }
+            var result = 1.0
+            for (i in 1..arg) {
+                result *= i.toDouble()
+            }
+            return result
+        }
+    }
+
+    //--------------------------------------------------------------------------------------------------
+    //**************************************************************************************************
+    //--------------------------------------------------------------------------------------------------
+
 
     fun isOper(string : String) : Boolean{
-        return (string == "*" || string == "+" || string == "-" || string == "/")
+        return (string == "*" || string == "+" || string == "-" || string == "/" || string == "^" || string == "!")
     }
 
     fun appendOnExpression(string : String, canClear : Boolean) {
@@ -157,7 +231,7 @@ class EngiCalcActivity : AppCompatActivity() {
         if(string == "." && (n == 0 || !(tvExpression.text[n - 1] in '0'..'9')))
             return
 
-        if(n > 0 && isOper(tvExpression.text[n - 1].toString()) && isOper(string)) {
+        if(n > 0 && tvExpression.text[n - 1] != '!' && isOper(tvExpression.text[n - 1].toString()) && isOper(string)) {
             if(n == 1) return
             tvExpression.text = tvExpression.text.substring(0, n - 1)
         }
