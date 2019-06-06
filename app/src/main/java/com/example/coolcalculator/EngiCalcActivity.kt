@@ -9,6 +9,7 @@ import net.objecthunter.exp4j.ExpressionBuilder
 class EngiCalcActivity : AppCompatActivity() {
 
     var isException : Boolean = false //Есть сейчас в TextView ошибка или нет.
+    var isDbl : Boolean = false // Вводится ли сейчас дробная часть числа или нет
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,13 +80,41 @@ class EngiCalcActivity : AppCompatActivity() {
 
     }
 
-    fun appendOnExpression(string : String, canClear : Boolean) {
+    fun isOper(string : String) : Boolean{
+        return (string == "*" || string == "+" || string == "-" || string == "/")
+    }
 
-        if(isException) return
+    fun appendOnExpression(string : String, canClear : Boolean) {
+        val n : Int = tvExpression.text.length
+
+        if(isException)
+            return
+
+        if(n == 0 && isOper(string))
+            return
+
+        if(isDbl && string == ".")
+            return
+
+        if(!isDbl && n > 0 && tvExpression.text[n - 1] == '0'
+            && ((n >= 2 && !(tvExpression.text[n - 2] in '0'..'9')) || (n == 1)) && string in "0".."9")
+            return
+
+        if(string == "." && (n == 0 || !(tvExpression.text[n - 1] in '0'..'9')))
+            return
+
+        if(n > 0 && isOper(tvExpression.text[n - 1].toString()) && isOper(string))
+            tvExpression.text = tvExpression.text.substring(0, n - 1)
+        else if(n > 0 && tvExpression.text[n - 1] == '.' && !(string in "0".."9"))
+            tvExpression.text = tvExpression.text.substring(0, n - 1)
+
 
         if(tvResult.text.isNotEmpty()){
             tvExpression.text = ""
         }
+
+        if(string == ".") isDbl = true
+        else if(!(string in "0".."9")) isDbl = false
 
         if(canClear) {
             tvResult.text = ""
@@ -96,4 +125,5 @@ class EngiCalcActivity : AppCompatActivity() {
             tvResult.text = ""
         }
     }
+
 }
