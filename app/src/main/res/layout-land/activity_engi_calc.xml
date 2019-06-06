@@ -45,6 +45,7 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
             <TextView
+<<<<<<< HEAD
                     android:id="@+id/tvOne"
                     style="@style/NumberButtonStyle"
                     android:text="1"/>
@@ -56,6 +57,20 @@
                     android:id="@+id/tvOne"
                     style="@style/NumberButtonStyle"
                     android:text="1"/>
+=======
+                    android:id="@+id/tvXInY"
+                    style="@style/EngiButtonStyle"
+                    android:text="x^y"/>
+            <TextView
+                    android:id="@+id/tvSqrtXY"
+                    style="@style/EngiButtonStyle"
+                    android:text="sqrt(x, y)"/>
+            <TextView
+                    android:id="@+id/tPer"
+                    style="@style/EngiButtonStyle"
+                    android:text="%"/>
+
+>>>>>>> 260f5ec7795c48c94ca63714761f9bd2566391fd
             <TextView
                     android:id="@+id/tvClear"
                     style="@style/ActionButtonStyle"
@@ -81,6 +96,7 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
             <TextView
+<<<<<<< HEAD
                     android:id="@+id/tvOne"
                     style="@style/NumberButtonStyle"
                     android:text="1"/>
@@ -92,6 +108,20 @@
                     android:id="@+id/tvOne"
                     style="@style/NumberButtonStyle"
                     android:text="1"/>
+=======
+                    android:id="@+id/tvFact"
+                    style="@style/EngiButtonStyle"
+                    android:text="n!"/>
+            <TextView
+                    android:id="@+id/tvLog"
+                    style="@style/EngiButtonStyle"
+                    android:text="log(x, y)"/>
+            <TextView
+                    android:id="@+id/tvSqrt"
+                    style="@style/EngiButtonStyle"
+                    android:text="sqrt"/>
+
+>>>>>>> 260f5ec7795c48c94ca63714761f9bd2566391fd
             <TextView
                     android:id="@+id/tvSeven"
                     style="@style/NumberButtonStyle"
@@ -117,6 +147,7 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
             <TextView
+<<<<<<< HEAD
                     android:id="@+id/tvOne"
                     style="@style/NumberButtonStyle"
                     android:text="1"/>
@@ -128,6 +159,19 @@
                     android:id="@+id/tvOne"
                     style="@style/NumberButtonStyle"
                     android:text="1"/>
+=======
+                    android:id="@+id/tvArcSin"
+                    style="@style/EngiButtonStyle"
+                    android:text="arcsin"/>
+            <TextView
+                    android:id="@+id/tvArcCos"
+                    style="@style/EngiButtonStyle"
+                    android:text="arccos"/>
+            <TextView
+                    android:id="@+id/tvArc"
+                    style="@style/EngiButtonStyle"
+                    android:text="arctg"/>
+>>>>>>> 260f5ec7795c48c94ca63714761f9bd2566391fd
             <TextView
                     android:id="@+id/tvFour"
                     style="@style/NumberButtonStyle"
@@ -153,6 +197,7 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
             <TextView
+<<<<<<< HEAD
                     android:id="@+id/tvOne"
                     style="@style/NumberButtonStyle"
                     android:text="1"/>
@@ -165,6 +210,20 @@
                     style="@style/NumberButtonStyle"
                     android:scaleType="centerInside"
                     android:src="@drawable/pi"/>
+=======
+                    android:id="@+id/tvTg"
+                    style="@style/EngiButtonStyle"
+                    android:text="tg"/>
+            <TextView
+                    android:id="@+id/tvCtg"
+                    style="@style/EngiButtonStyle"
+                    android:text="ctg"/>
+            <TextView
+                    android:id="@+id/tvPi"
+                    style="@style/EngiButtonStyle"
+                    android:text="arcctg"/>
+
+>>>>>>> 260f5ec7795c48c94ca63714761f9bd2566391fd
             <TextView
                     android:id="@+id/tvOne"
                     style="@style/NumberButtonStyle"
@@ -191,6 +250,7 @@
                 android:orientation="horizontal">
             <TextView
                     android:id="@+id/tvSin"
+<<<<<<< HEAD
                     style="@style/ActionButtonStyle"
                     android:text="sin"/>
             <TextView
@@ -201,10 +261,28 @@
                     android:id="@+id/tvTan"
                     style="@style/ActionButtonStyle"
                     android:text="tan"/>
+=======
+                    style="@style/EngiButtonStyle"
+                    android:text="sin"/>
+            <TextView
+                    android:id="@+id/tvCos"
+                    style="@style/EngiButtonStyle"
+                    android:text="cos"/>
+            <ImageView
+                    android:id="@+id/tvPi"
+                    style="@style/EngiButtonStyle"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/pi"/>
+
+>>>>>>> 260f5ec7795c48c94ca63714761f9bd2566391fd
             <TextView
                     android:id="@+id/tvDot"
                     style="@style/NumberButtonStyle"
                     android:text="."/>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 260f5ec7795c48c94ca63714761f9bd2566391fd
             <TextView
                     android:id="@+id/tvZero"
                     style="@style/NumberButtonStyle"
@@ -214,6 +292,10 @@
                     style="@style/NumberButtonStyle"
                     android:src="@drawable/bs"
                     android:scaleType="centerInside"/>
+<<<<<<< HEAD
+=======
+
+>>>>>>> 260f5ec7795c48c94ca63714761f9bd2566391fd
             <TextView
                     android:id="@+id/tvEquals"
                     style="@style/ActionButtonStyle"
