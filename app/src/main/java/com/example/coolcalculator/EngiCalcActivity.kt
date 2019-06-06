@@ -12,6 +12,8 @@ class EngiCalcActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_engi_calc)
 
+        getSupportActionBar()!!.hide()
+
         tvOne.setOnClickListener {appendOnExpression("1",true)}
         tvTwo.setOnClickListener {appendOnExpression("2",true)}
         tvThree.setOnClickListener {appendOnExpression("3",true)}

@@ -1,9 +1,9 @@
 <resources>
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/backgroundMain</item>
+        <item name="colorPrimaryDark">@color/backgroundMain</item>
+        <item name="colorAccent">@color/backgroundMain</item>
     </style>
 
     <style name="ActionButtonStyle">
