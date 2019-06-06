@@ -12,6 +12,7 @@ class GraphActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_graph)
 
+        getSupportActionBar()!!.hide()
 
     }
 

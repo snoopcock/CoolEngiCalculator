@@ -11,6 +11,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        getSupportActionBar()!!.hide()
+
         buttonCalc.setOnClickListener {
             val intent = Intent(this, EngiCalcActivity::class.java)
 
