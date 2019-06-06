@@ -9,6 +9,7 @@ import net.objecthunter.exp4j.ExpressionBuilder
 class EngiCalcActivity : AppCompatActivity() {
 
     var isException : Boolean = false //Есть сейчас в TextView ошибка или нет.
+    var isDbl : Boolean = false // Вводится ли сейчас дробная часть числа или нет
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,9 +26,9 @@ class EngiCalcActivity : AppCompatActivity() {
         tvSeven.setOnClickListener {appendOnExpression("7",true)}
         tvEight.setOnClickListener {appendOnExpression("8",true)}
         tvNine.setOnClickListener {appendOnExpression("9",true)}
-        tvDot.setOnClickListener {appendOnExpression(".",true)}
         tvZero.setOnClickListener {appendOnExpression("0",true)}
 
+        tvDot.setOnClickListener {appendOnExpression(".",false)}
         tvPlus.setOnClickListener {appendOnExpression("+", false)}
         tvMinus.setOnClickListener {appendOnExpression("-", false)}
         tvMul.setOnClickListener {appendOnExpression("*", false)}
@@ -39,6 +40,7 @@ class EngiCalcActivity : AppCompatActivity() {
             tvExpression.text = ""
             tvResult.text = ""
             isException = false
+            isDbl = false
         }
 
         tvBack.setOnClickListener{
@@ -49,6 +51,13 @@ class EngiCalcActivity : AppCompatActivity() {
             val string = tvExpression.text.toString()
             if(string.isNotEmpty()){
                 tvExpression.text = string.substring(0, string.length-1)
+            }
+            isDbl = false
+            for(i in (tvExpression.text.length - 1) downTo 0){
+                if(tvExpression.text[i] == '.'){
+                    isDbl = true
+                    break
+                } else if(!(tvExpression.text[i] in '0'..'9')) break;
             }
             tvResult.text = ""
         }
@@ -64,7 +73,8 @@ class EngiCalcActivity : AppCompatActivity() {
                 else
                     tvResult.text = result.toString()
 
-            }catch (e:Exception){
+
+            } catch (e:Exception){
                 if(isException){
                     tvExpression.text = ""
                     tvResult.text = ""
@@ -74,18 +84,67 @@ class EngiCalcActivity : AppCompatActivity() {
                     Log.d("Exception", "message: " + e.message)
                     isException = true
                 }
+                isDbl = false
             }
         }
 
     }
 
-    fun appendOnExpression(string : String, canClear : Boolean) {
+    fun isOper(string : String) : Boolean{
+        return (string == "*" || string == "+" || string == "-" || string == "/")
+    }
 
-        if(isException) return
+    fun appendOnExpression(string : String, canClear : Boolean) {
+        val n : Int = tvExpression.text.length
+
+        if(isException)
+            return
 
         if(tvResult.text.isNotEmpty()){
             tvExpression.text = ""
+            isDbl = false
+            if(canClear) {
+                tvResult.text = ""
+                tvExpression.append(string)
+            }else {
+                tvExpression.append(tvResult.text)
+                isDbl = false
+                for(i in (tvResult.text.length - 1) downTo 0){
+                    if(tvResult.text[i] == '.'){
+                        isDbl = true
+                        break
+                    } else if(!(tvResult.text[i] in '0'..'9')) break;
+                }
+                if(string != "." || !isDbl)
+                    tvExpression.append(string)
+                tvResult.text = ""
+            }
+            return
         }
+
+        if(n == 0 && string != "-" && isOper(string))
+            return
+
+        if(isDbl && string == ".")
+            return
+
+        if(!isDbl && n > 0 && tvExpression.text[n - 1] == '0'
+            && ((n >= 2 && !(tvExpression.text[n - 2] in '0'..'9')) || (n == 1)) && string in "0".."9")
+            return
+
+        if(string == "." && (n == 0 || !(tvExpression.text[n - 1] in '0'..'9')))
+            return
+
+        if(n > 0 && isOper(tvExpression.text[n - 1].toString()) && isOper(string)) {
+            if(n == 1) return
+            tvExpression.text = tvExpression.text.substring(0, n - 1)
+        }
+        else if(n > 0 && tvExpression.text[n - 1] == '.' && !(string in "0".."9")) {
+            if (n == 1) return
+            tvExpression.text = tvExpression.text.substring(0, n - 1)
+        }
+        if(string == ".") isDbl = true
+        else if(!(string in "0".."9")) isDbl = false
 
         if(canClear) {
             tvResult.text = ""
@@ -96,4 +155,5 @@ class EngiCalcActivity : AppCompatActivity() {
             tvResult.text = ""
         }
     }
+
 }
