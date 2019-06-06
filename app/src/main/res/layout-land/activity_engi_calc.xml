@@ -163,7 +163,7 @@
                     style="@style/EngiButtonStyle"
                     android:text="cot"/>
             <TextView
-                    android:id="@+id/tvArcCtg"
+                    android:id="@+id/tvArcСtg"
                     style="@style/EngiButtonStyle"
                     android:text="acot"/>
 
