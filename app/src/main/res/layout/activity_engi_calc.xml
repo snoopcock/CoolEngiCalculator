@@ -148,6 +148,11 @@
                     android:id="@+id/tvDot"
                     style="@style/NumberButtonStyle"
                     android:text="."/>
+
+            <TextView
+                    android:id="@+id/tvDot"
+                    style="@style/NumberButtonStyle"
+                    android:text="."/>
             <TextView
                     android:id="@+id/tvZero"
                     style="@style/NumberButtonStyle"
