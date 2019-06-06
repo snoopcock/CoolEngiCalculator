@@ -8,6 +8,8 @@ import net.objecthunter.exp4j.ExpressionBuilder
 
 class EngiCalcActivity : AppCompatActivity() {
 
+    var isException : Boolean = false //Есть сейчас в TextView ошибка или нет.
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_engi_calc)
@@ -36,9 +38,14 @@ class EngiCalcActivity : AppCompatActivity() {
         tvClear.setOnClickListener{
             tvExpression.text = ""
             tvResult.text = ""
+            isException = false
         }
 
         tvBack.setOnClickListener{
+            if(isException){
+                tvExpression.text = ""
+                isException = false
+            }
             val string = tvExpression.text.toString()
             if(string.isNotEmpty()){
                 tvExpression.text = string.substring(0, string.length-1)
@@ -58,13 +65,23 @@ class EngiCalcActivity : AppCompatActivity() {
                     tvResult.text = result.toString()
 
             }catch (e:Exception){
-                Log.d("Exception", "message: " + e.message)
+                if(isException){
+                    tvExpression.text = ""
+                    tvResult.text = ""
+                    isException = false
+                } else{
+                    tvExpression.text = "Error"
+                    Log.d("Exception", "message: " + e.message)
+                    isException = true
+                }
             }
         }
 
     }
 
     fun appendOnExpression(string : String, canClear : Boolean) {
+
+        if(isException) return
 
         if(tvResult.text.isNotEmpty()){
             tvExpression.text = ""
