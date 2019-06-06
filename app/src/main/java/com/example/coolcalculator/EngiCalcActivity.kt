@@ -26,9 +26,9 @@ class EngiCalcActivity : AppCompatActivity() {
         tvSeven.setOnClickListener {appendOnExpression("7",true)}
         tvEight.setOnClickListener {appendOnExpression("8",true)}
         tvNine.setOnClickListener {appendOnExpression("9",true)}
-        tvDot.setOnClickListener {appendOnExpression(".",true)}
         tvZero.setOnClickListener {appendOnExpression("0",true)}
 
+        tvDot.setOnClickListener {appendOnExpression(".",false)}
         tvPlus.setOnClickListener {appendOnExpression("+", false)}
         tvMinus.setOnClickListener {appendOnExpression("-", false)}
         tvMul.setOnClickListener {appendOnExpression("*", false)}
@@ -40,6 +40,7 @@ class EngiCalcActivity : AppCompatActivity() {
             tvExpression.text = ""
             tvResult.text = ""
             isException = false
+            isDbl = false
         }
 
         tvBack.setOnClickListener{
@@ -50,6 +51,13 @@ class EngiCalcActivity : AppCompatActivity() {
             val string = tvExpression.text.toString()
             if(string.isNotEmpty()){
                 tvExpression.text = string.substring(0, string.length-1)
+            }
+            isDbl = false
+            for(i in (tvExpression.text.length - 1) downTo 0){
+                if(tvExpression.text[i] == '.'){
+                    isDbl = true
+                    break
+                } else if(!(tvExpression.text[i] in '0'..'9')) break;
             }
             tvResult.text = ""
         }
@@ -65,7 +73,8 @@ class EngiCalcActivity : AppCompatActivity() {
                 else
                     tvResult.text = result.toString()
 
-            }catch (e:Exception){
+
+            } catch (e:Exception){
                 if(isException){
                     tvExpression.text = ""
                     tvResult.text = ""
@@ -75,6 +84,7 @@ class EngiCalcActivity : AppCompatActivity() {
                     Log.d("Exception", "message: " + e.message)
                     isException = true
                 }
+                isDbl = false
             }
         }
 
@@ -89,6 +99,28 @@ class EngiCalcActivity : AppCompatActivity() {
 
         if(isException)
             return
+
+        if(tvResult.text.isNotEmpty()){
+            tvExpression.text = ""
+            isDbl = false
+            if(canClear) {
+                tvResult.text = ""
+                tvExpression.append(string)
+            }else {
+                tvExpression.append(tvResult.text)
+                isDbl = false
+                for(i in (tvResult.text.length - 1) downTo 0){
+                    if(tvResult.text[i] == '.'){
+                        isDbl = true
+                        break
+                    } else if(!(tvResult.text[i] in '0'..'9')) break;
+                }
+                if(string != "." || !isDbl)
+                    tvExpression.append(string)
+                tvResult.text = ""
+            }
+            return
+        }
 
         if(n == 0 && isOper(string))
             return
@@ -107,11 +139,6 @@ class EngiCalcActivity : AppCompatActivity() {
             tvExpression.text = tvExpression.text.substring(0, n - 1)
         else if(n > 0 && tvExpression.text[n - 1] == '.' && !(string in "0".."9"))
             tvExpression.text = tvExpression.text.substring(0, n - 1)
-
-
-        if(tvResult.text.isNotEmpty()){
-            tvExpression.text = ""
-        }
 
         if(string == ".") isDbl = true
         else if(!(string in "0".."9")) isDbl = false
