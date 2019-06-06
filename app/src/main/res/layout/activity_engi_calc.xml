@@ -156,7 +156,7 @@
             <ImageView
                     android:id="@+id/tvBack"
                     style="@style/NumberButtonStyle"
-                    android:src="@drawable/bsSmall"
+                    android:src="@drawable/bssmall"
                     android:scaleType="centerInside"/>
             <TextView
                     android:id="@+id/tvEquals"
