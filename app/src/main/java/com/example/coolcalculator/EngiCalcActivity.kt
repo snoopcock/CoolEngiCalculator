@@ -18,6 +18,8 @@ class EngiCalcActivity : AppCompatActivity() {
         outState.run {
             putString("EXP", tvExpression.text.toString())
             putString("RES", tvResult.text.toString())
+            putBoolean("EXC", isException)
+            putBoolean("DB", isDbl)
         }
 
     }
@@ -27,6 +29,8 @@ class EngiCalcActivity : AppCompatActivity() {
 
         tvExpression.text = savedInstanceState.getString("EXP")
         tvResult.text = savedInstanceState.getString("RES")
+        isException = savedInstanceState.getBoolean("EXC")
+        isDbl = savedInstanceState.getBoolean("DB")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
