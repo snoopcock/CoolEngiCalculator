@@ -15,26 +15,25 @@ class EngiCalcActivity : AppCompatActivity() {
     var isException : Boolean = false //Есть сейчас в TextView ошибка или нет.
     var isDbl : Boolean = false // Вводится ли сейчас дробная часть числа или нет
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
+    fun setTvButtons(){
+        tvOne.setOnClickListener {appendOnExpression("1",true)}
+        tvTwo.setOnClickListener {appendOnExpression("2",true)}
+        tvThree.setOnClickListener {appendOnExpression("3",true)}
+        tvFour.setOnClickListener {appendOnExpression("4",true)}
+        tvFive.setOnClickListener {appendOnExpression("5",true)}
+        tvSix.setOnClickListener {appendOnExpression("6",true)}
+        tvSeven.setOnClickListener {appendOnExpression("7",true)}
+        tvEight.setOnClickListener {appendOnExpression("8",true)}
+        tvNine.setOnClickListener {appendOnExpression("9",true)}
+        tvZero.setOnClickListener {appendOnExpression("0",true)}
 
-        outState.run {
-            putString("EXP", tvExpression.text.toString())
-            putString("RES", tvResult.text.toString())
-            putBoolean("EXC", isException)
-            putBoolean("DB", isDbl)
-        }
-
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-
-        tvExpression.text = savedInstanceState.getString("EXP")
-        tvResult.text = savedInstanceState.getString("RES")
-        isException = savedInstanceState.getBoolean("EXC")
-        isDbl = savedInstanceState.getBoolean("DB")
-
+        tvDot.setOnClickListener {appendOnExpression(".",false)}
+        tvPlus.setOnClickListener {appendOnExpression("+", false)}
+        tvMinus.setOnClickListener {appendOnExpression("-", false)}
+        tvMul.setOnClickListener {appendOnExpression("*", false)}
+        tvDevide.setOnClickListener {appendOnExpression("/", false)}
+        tvOpen.setOnClickListener {appendOnExpression("(", false)}
+        tvClose.setOnClickListener {appendOnExpression(")", false)}
         if(tvFact != null)
             tvFact.setOnClickListener { appendOnExpression("!", false) }
         if(tvPow != null)
@@ -63,7 +62,6 @@ class EngiCalcActivity : AppCompatActivity() {
             tvCos.setOnClickListener { appendOnExpression("cos(", true) }
         if(tvPi != null)
             tvPi.setOnClickListener{appendOnExpression("pi", true)}
-
         if(tvPer != null)
             tvPer.setOnClickListener {
                 if(isException) return@setOnClickListener
@@ -75,6 +73,28 @@ class EngiCalcActivity : AppCompatActivity() {
             }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        outState.run {
+            putString("EXP", tvExpression.text.toString())
+            putString("RES", tvResult.text.toString())
+            putBoolean("EXC", isException)
+            putBoolean("DB", isDbl)
+        }
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+
+        setTvButtons()
+
+        tvExpression.text = savedInstanceState.getString("EXP")
+        tvResult.text = savedInstanceState.getString("RES")
+        isException = savedInstanceState.getBoolean("EXC")
+        isDbl = savedInstanceState.getBoolean("DB")
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_engi_calc)
@@ -83,24 +103,7 @@ class EngiCalcActivity : AppCompatActivity() {
 
         Log.d("MainChecker: ", "Everything fine in EngiCalcActivity")
 
-        tvOne.setOnClickListener {appendOnExpression("1",true)}
-        tvTwo.setOnClickListener {appendOnExpression("2",true)}
-        tvThree.setOnClickListener {appendOnExpression("3",true)}
-        tvFour.setOnClickListener {appendOnExpression("4",true)}
-        tvFive.setOnClickListener {appendOnExpression("5",true)}
-        tvSix.setOnClickListener {appendOnExpression("6",true)}
-        tvSeven.setOnClickListener {appendOnExpression("7",true)}
-        tvEight.setOnClickListener {appendOnExpression("8",true)}
-        tvNine.setOnClickListener {appendOnExpression("9",true)}
-        tvZero.setOnClickListener {appendOnExpression("0",true)}
-
-        tvDot.setOnClickListener {appendOnExpression(".",false)}
-        tvPlus.setOnClickListener {appendOnExpression("+", false)}
-        tvMinus.setOnClickListener {appendOnExpression("-", false)}
-        tvMul.setOnClickListener {appendOnExpression("*", false)}
-        tvDevide.setOnClickListener {appendOnExpression("/", false)}
-        tvOpen.setOnClickListener {appendOnExpression("(", false)}
-        tvClose.setOnClickListener {appendOnExpression(")", false)}
+        setTvButtons()
 
         tvClear.setOnClickListener{
             tvExpression.text = ""
@@ -137,8 +140,8 @@ class EngiCalcActivity : AppCompatActivity() {
         }
 
         tvEquals.setOnClickListener{
+            if(tvExpression.text.isEmpty()) return@setOnClickListener
             try {
-
                 val expression = ExpressionBuilder(tvExpression.text.toString()).function(sqrt).function(log).function(cot).function(acot).operator(factorial).build()
                 val result = expression.evaluate()
                 val longResult = result.toLong()
@@ -146,7 +149,10 @@ class EngiCalcActivity : AppCompatActivity() {
                     tvResult.text = longResult.toString()
                 else
                     tvResult.text = result.toString()
-                if(tvResult.text == "NaN") throw IllegalArgumentException("Bad Argument")
+                if(tvResult.text == "NaN"){
+                    tvResult.text = ""
+                    throw IllegalArgumentException("Bad Argument")
+                }
 
             } catch (e:Exception){
                 if(isException){
@@ -256,7 +262,7 @@ class EngiCalcActivity : AppCompatActivity() {
         if(n == 0 && string != "-" && isOper(string))
             return
 
-        if(n > 0 && tvExpression.text[n - 1] == '(' && isOper(string))
+        if(n > 0 && tvExpression.text[n - 1] == '(' && string != "-" && isOper(string))
             return
 
         if(string == ","){
@@ -325,5 +331,4 @@ class EngiCalcActivity : AppCompatActivity() {
             tvResult.text = ""
         }
     }
-
 }
