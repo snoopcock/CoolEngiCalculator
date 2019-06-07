@@ -156,4 +156,8 @@ class EngiCalcActivity : AppCompatActivity() {
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        Log.d("TAG :", "SVITS")
+    }
 }
