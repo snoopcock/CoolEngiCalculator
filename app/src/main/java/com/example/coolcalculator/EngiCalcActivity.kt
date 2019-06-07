@@ -142,7 +142,7 @@ class EngiCalcActivity : AppCompatActivity() {
         tvEquals.setOnClickListener{
             if(tvExpression.text.isEmpty()) return@setOnClickListener
             try {
-                val expression = ExpressionBuilder(tvExpression.text.toString()).function(sqrt).function(log).function(cot).function(acot).operator(factorial).build()
+                val expression = ExpressionBuilder(tvExpression.text.toString()).function(sqrtXY).function(sqrt).function(log).function(cot).function(acot).operator(factorial).build()
                 val result = expression.evaluate()
                 val longResult = result.toLong()
                 if(result == longResult.toDouble())
@@ -173,16 +173,23 @@ class EngiCalcActivity : AppCompatActivity() {
     //************************Additional functions and operators****************************************
     //--------------------------------------------------------------------------------------------------
 
-    var sqrt = object: Function("sqrt", 2){
+    var sqrtXY = object: Function("sqrt", 2){
         override fun apply(vararg args : Double) : Double{
             when(args[1]){
                 2.0 -> return Math.sqrt(args[0])
                 3.0 -> return Math.cbrt(args[0])
                 else -> {
-                    if(args[0] < 0 && args[1].toInt() % 2 == 1) throw IllegalArgumentException("Bad Argument")
+                    if(args[0] < 0 && args[1].toInt() % 2 == 0) throw IllegalArgumentException("Bad Argument")
                     return Math.pow(args[0], 1 / args[1])
                 }
             }
+        }
+    }
+
+    var sqrt = object: Function("sqrt", 1){
+        override fun apply(vararg args : Double) : Double{
+            if(args[0] < 0) throw IllegalArgumentException("Bad Argument")
+            else return Math.sqrt(args[0])
         }
     }
 
