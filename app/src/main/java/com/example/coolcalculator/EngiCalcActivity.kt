@@ -298,6 +298,10 @@ class EngiCalcActivity : AppCompatActivity() {
             }
         }
 
+        if(n > 0 && string in "0".."9" && tvExpression.text[n - 1] == 'i'){
+            tvExpression.append("*")
+        }
+
         if(isDbl && string == ".")
             return
 
