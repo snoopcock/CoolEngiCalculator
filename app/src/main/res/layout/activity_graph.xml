@@ -9,6 +9,7 @@
     <LinearLayout android:layout_width="match_parent"
                   android:layout_height="match_parent"
                   android:orientation="vertical">
+
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -31,34 +32,44 @@
                 <TextView android:id="@+id/tvAddGraph"
                           android:layout_width="230sp"
                           android:layout_height="50sp"
-                          android:text="  ADD GRAPH "
+                          android:text=" ADD GRAPH"
                           android:textColor="@android:color/white"
                           android:textSize="35sp"/>
+
                 <TextView android:id="@+id/tvSpaceText"
                           android:layout_width="230sp"
                           android:layout_height="40sp"
-                          android:text="      push + and enter the function"
+                          android:text="   push + and enter the function"
                           android:textColor="@android:color/white"
                           android:textSize="15sp"/>
 
             </LinearLayout>
+
+            <TextView
+                    android:id="@+id/tvInv0"
+                    style="@style/AppTheme"
+                    android:layout_width="10dp"
+                    android:layout_height="20dp"/>
+
             <TextView
                     android:id="@+id/tvPlusGraph"
                     style="@style/GraphButtonStyle"
                     android:layout_width="40dp"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:textSize="25sp"
                     android:text="+"/>
+
             <TextView
                     android:id="@+id/tvInv1"
                     style="@style/AppTheme"
                     android:layout_width="70dp"
-                    android:layout_height="60dp"/>
+                    android:layout_height="40dp"/>
+
             <TextView
                     android:id="@+id/Inv2"
                     style="@style/AppTheme"
                     android:layout_width="70dp"
-                    android:layout_height="60dp"/>
+                    android:layout_height="40dp"/>
 
         </LinearLayout>
 
@@ -214,7 +225,7 @@
                     style="@style/GraphButtonStyle"
                     android:layout_width="70dp"
                     android:layout_height="50dp"
-                    android:text="BUILD"/>
+                    android:text="Build"/>
             <TextView
                     android:id="@+id/Inv7"
                     style="@style/AppTheme"

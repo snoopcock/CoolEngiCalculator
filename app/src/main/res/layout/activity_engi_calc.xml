@@ -42,7 +42,7 @@
                       android:text="rotate your phone to use an engi calc"
                       android:textColor="@color/engiButton"
                       android:textSize="20sp"
-                      android:layout_marginTop="70dp"/>
+                      android:layout_marginTop="60dp"/>
 
         </LinearLayout>
 
