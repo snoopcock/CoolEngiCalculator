@@ -22,6 +22,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:orientation="horizontal">
+
             <TextView android:id="@+id/tvYEq"
                       android:layout_width="100sp"
                       android:layout_height="match_parent"
@@ -33,10 +34,8 @@
                     android:id="@+id/tvFunction"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textColor="@color/textColor"
-                    android:textSize="40sp"
-                    android:ellipsize="end"
-                    android:singleLine="true"/>
+                    android:textColor="@android:color/white"
+                    android:textSize="40sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -54,19 +53,19 @@
                 android:orientation="horizontal">
 
             <TextView
-                    android:id="@+id/tvClear"
+                    android:id="@+id/tvClear1"
                     style="@style/NumberButtonStyle"
                     android:text="CE"/>
             <TextView
-                    android:id="@+id/tvOpen"
+                    android:id="@+id/tvOpen1"
                     style="@style/NumberButtonStyle"
                     android:text="("/>
             <TextView
-                    android:id="@+id/tvClose"
+                    android:id="@+id/tvClose1"
                     style="@style/NumberButtonStyle"
                     android:text=")"/>
             <TextView
-                    android:id="@+id/tvDevide"
+                    android:id="@+id/tvDevide1"
                     style="@style/NumberButtonStyle"
                     android:text="/"/>
             <TextView
@@ -83,23 +82,23 @@
                 android:orientation="horizontal">
 
             <TextView
-                    android:id="@+id/tvSeven"
+                    android:id="@+id/tvSeven1"
                     style="@style/NumberButtonStyle"
                     android:text="7"/>
             <TextView
-                    android:id="@+id/tvEight"
+                    android:id="@+id/tvEight1"
                     style="@style/NumberButtonStyle"
                     android:text="8"/>
             <TextView
-                    android:id="@+id/tvNine"
+                    android:id="@+id/tvNine1"
                     style="@style/NumberButtonStyle"
                     android:text="9"/>
             <TextView
-                    android:id="@+id/tvMul"
+                    android:id="@+id/tvMul1"
                     style="@style/NumberButtonStyle"
                     android:text="*"/>
             <TextView
-                    android:id="@+id/tvDot"
+                    android:id="@+id/tvDot1"
                     style="@style/NumberButtonStyle"
                     android:text="."/>
 
@@ -112,23 +111,23 @@
                 android:orientation="horizontal">
 
             <TextView
-                    android:id="@+id/tvFour"
+                    android:id="@+id/tvFour1"
                     style="@style/NumberButtonStyle"
                     android:text="4"/>
             <TextView
-                    android:id="@+id/tvFive"
+                    android:id="@+id/tvFive1"
                     style="@style/NumberButtonStyle"
                     android:text="5"/>
             <TextView
-                    android:id="@+id/tvSix"
+                    android:id="@+id/tvSix1"
                     style="@style/NumberButtonStyle"
                     android:text="6"/>
             <TextView
-                    android:id="@+id/tvMinus"
+                    android:id="@+id/tvMinus1"
                     style="@style/NumberButtonStyle"
                     android:text="-"/>
             <TextView
-                    android:id="@+id/tvZero"
+                    android:id="@+id/tvZero1"
                     style="@style/NumberButtonStyle"
                     android:text="0"/>
 
@@ -141,23 +140,23 @@
                 android:orientation="horizontal">
 
             <TextView
-                    android:id="@+id/tvOne"
+                    android:id="@+id/tvOne1"
                     style="@style/NumberButtonStyle"
                     android:text="1"/>
             <TextView
-                    android:id="@+id/tvTwo"
+                    android:id="@+id/tvTwo1"
                     style="@style/NumberButtonStyle"
                     android:text="2"/>
             <TextView
-                    android:id="@+id/tvThree"
+                    android:id="@+id/tvThree1"
                     style="@style/NumberButtonStyle"
                     android:text="3"/>
             <TextView
-                    android:id="@+id/tvPlus"
+                    android:id="@+id/tvPlus1"
                     style="@style/NumberButtonStyle"
                     android:text="+"/>
             <ImageView
-                    android:id="@+id/tvBack"
+                    android:id="@+id/tvBack1"
                     style="@style/NumberButtonStyle"
                     android:src="@drawable/bssmall"
                     android:scaleType="centerInside"/>
