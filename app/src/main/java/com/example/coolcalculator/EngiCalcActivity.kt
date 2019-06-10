@@ -101,7 +101,7 @@ class EngiCalcActivity : AppCompatActivity() {
 
         getSupportActionBar()!!.hide()
 
-        Log.d("MainChecker: ", "Everything fine in EngiCalcActivity")
+        Log.d("EngiCalcActivity: ", "Everything fine in EngiCalcActivity")
 
         setTvButtons()
 
@@ -142,7 +142,27 @@ class EngiCalcActivity : AppCompatActivity() {
         tvEquals.setOnClickListener{
             if(tvExpression.text.isEmpty()) return@setOnClickListener
             try {
-                val expression = ExpressionBuilder(tvExpression.text.toString()).function(sqrtXY).function(sqrt).function(log).function(cot).function(acot).operator(factorial).build()
+                var exp : String = tvExpression.text.toString()
+                for(i : Int in 0 until exp.length){
+                    if(exp[i] != 'q') continue
+                    var bal : Int = 0
+                    var cnt : Int = 0
+                    var ind : Int = -1
+                    for(j : Int in (i + 4) until exp.length){
+                        if(exp[j] == ')' && bal == 0){
+                            ind = j
+                            break
+                        }
+                        if(exp[j] == ',' && bal == 0) cnt++
+                        if(exp[j] == '(') bal++
+                        if(exp[j] == ')') bal--
+                    }
+                    if(ind == -1) break
+                    if(cnt > 0) continue
+                    exp = exp.substring(0, ind) + ",2" + exp.substring(ind, exp.length)
+                }
+                Log.d("EngiCalcActivity: ", "tvExpression: ${exp}")
+                val expression = ExpressionBuilder(exp).function(sqrtXY).function(log).function(cot).function(acot).operator(factorial).build()
                 val result = expression.evaluate()
                 val longResult = result.toLong()
                 if(result == longResult.toDouble())
@@ -175,6 +195,7 @@ class EngiCalcActivity : AppCompatActivity() {
 
     var sqrtXY = object: Function("sqrt", 2){
         override fun apply(vararg args : Double) : Double{
+            Log.d("EngiCalcActivity: ", "SQRT CHECK 1")
             when(args[1]){
                 2.0 -> return Math.sqrt(args[0])
                 3.0 -> return Math.cbrt(args[0])
@@ -186,12 +207,6 @@ class EngiCalcActivity : AppCompatActivity() {
         }
     }
 
-    var sqrt = object: Function("sqrt", 1){
-        override fun apply(vararg args : Double) : Double{
-            if(args[0] < 0) throw IllegalArgumentException("Bad Argument")
-            else return Math.sqrt(args[0])
-        }
-    }
 
     var log = object : Function("log", 2) {
         override fun apply(vararg args: Double): Double {
@@ -321,10 +336,12 @@ class EngiCalcActivity : AppCompatActivity() {
 
         if(n > 0 && tvExpression.text[n - 1] != '!' && isOper(tvExpression.text[n - 1].toString()) && isOper(string)) {
             if(n == 1) return
+            if(tvExpression.text[n - 2] == '(') return
             tvExpression.text = tvExpression.text.substring(0, n - 1)
         }
         else if(n > 0 && tvExpression.text[n - 1] == '.' && !(string in "0".."9")) {
             if (n == 1) return
+            if(tvExpression.text[n - 2] == '(') return
             tvExpression.text = tvExpression.text.substring(0, n - 1)
         }
 
