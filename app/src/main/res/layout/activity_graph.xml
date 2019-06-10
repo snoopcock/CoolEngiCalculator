@@ -114,12 +114,12 @@
                             android:layout_width="20dp"
                             android:layout_height="20dp"/>
                     <TextView
-                            android:id="@+id/tvHide1"
+                            android:id="@+id/tvDelete1"
                             style="@style/GraphButtonStyle"
                             android:layout_width="30dp"
                             android:layout_height="40dp"
                             android:textSize="20sp"
-                            android:text="Hide"/>
+                            android:text="Delete"/>
                     <TextView
                             android:id="@+id/Inv9"
                             style="@style/AppTheme"
@@ -145,12 +145,12 @@
                             android:layout_width="20dp"
                             android:layout_height="20dp"/>
                     <TextView
-                            android:id="@+id/tvHide2"
+                            android:id="@+id/tvDelete2"
                             style="@style/GraphButtonStyle"
                             android:layout_width="30dp"
                             android:layout_height="40dp"
                             android:textSize="20sp"
-                            android:text="Hide"/>
+                            android:text="Delete"/>
                     <TextView
                             android:id="@+id/Inv11"
                             style="@style/AppTheme"
