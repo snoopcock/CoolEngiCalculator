@@ -1,5 +1,6 @@
 package com.example.coolcalculator
 
+import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +16,10 @@ class GraphActivity : AppCompatActivity() {
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-    }
+        buttonPlus.setOnClickListener {
+            val intent = Intent(this, EnterGraphActivity::class.java)
+            startActivity(intent)
 
+        }
+    }
 }
