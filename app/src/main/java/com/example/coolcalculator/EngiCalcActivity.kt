@@ -14,6 +14,7 @@ class EngiCalcActivity : AppCompatActivity() {
 
     var isException : Boolean = false //Есть сейчас в TextView ошибка или нет.
     var isDbl : Boolean = false // Вводится ли сейчас дробная часть числа или нет
+    var curBal : Int = 0 //Баланс скобок
 
     fun setTvButtons(){
         tvOne.setOnClickListener {appendOnExpression("1",true)}
@@ -81,6 +82,7 @@ class EngiCalcActivity : AppCompatActivity() {
             putString("RES", tvResult.text.toString())
             putBoolean("EXC", isException)
             putBoolean("DB", isDbl)
+            putInt("BL", curBal)
         }
     }
 
@@ -93,6 +95,7 @@ class EngiCalcActivity : AppCompatActivity() {
         tvResult.text = savedInstanceState.getString("RES")
         isException = savedInstanceState.getBoolean("EXC")
         isDbl = savedInstanceState.getBoolean("DB")
+        curBal = savedInstanceState.getInt("BL")
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -101,7 +104,7 @@ class EngiCalcActivity : AppCompatActivity() {
 
         getSupportActionBar()!!.hide()
 
-        Log.d("MainChecker: ", "Everything fine in EngiCalcActivity")
+        Log.d("EngiCalcActivity: ", "Everything fine in EngiCalcActivity")
 
         setTvButtons()
 
@@ -110,6 +113,7 @@ class EngiCalcActivity : AppCompatActivity() {
             tvResult.text = ""
             isException = false
             isDbl = false
+            curBal = 0
         }
 
         tvBack.setOnClickListener{
@@ -122,11 +126,14 @@ class EngiCalcActivity : AppCompatActivity() {
                 tvExpression.text = tvExpression.text.substring(0, tvExpression.text.length - 1)
                 while (tvExpression.text.length > 0 && tvExpression.text[tvExpression.text.length - 1] in 'a'..'z')
                     tvExpression.text = tvExpression.text.substring(0, tvExpression.text.length - 1)
+                curBal--
             }
             else if(n > 1 && tvExpression.text[n - 1] == 'i'){
                 tvExpression.text = tvExpression.text.substring(0, tvExpression.text.length - 2)
             }
             else if(tvExpression.text.isNotEmpty()){
+                if(tvExpression.text[n - 1] == '(') curBal--
+                if(tvExpression.text[n - 1] == ')') curBal++
                 tvExpression.text = tvExpression.text.substring(0, tvExpression.text.length-1)
             }
             isDbl = false
@@ -136,13 +143,44 @@ class EngiCalcActivity : AppCompatActivity() {
                     break
                 } else if(!(tvExpression.text[i] in '0'..'9')) break;
             }
-            tvResult.text = ""
+            reCalc()
+            //tvResult.text = ""
         }
 
         tvEquals.setOnClickListener{
             if(tvExpression.text.isEmpty()) return@setOnClickListener
             try {
-                val expression = ExpressionBuilder(tvExpression.text.toString()).function(sqrtXY).function(log).function(cot).function(acot).operator(factorial).build()
+                var exp : String = tvExpression.text.toString()
+                if(exp[exp.length - 1] == '*' || exp[exp.length - 1] == '+' || exp[exp.length - 1] == '-' || exp[exp.length - 1] == '/'){
+                    exp = exp.substring(0, exp.length - 1)
+                }
+                if(exp.length == 0){
+                    tvResult.text = ""
+                    return@setOnClickListener
+                }
+                if(curBal > 0)
+                    for(i in 1..curBal)
+                        exp = exp.plus(')')
+                for(i : Int in 0 until exp.length){
+                    if(exp[i] != 'q') continue
+                    var bal : Int = 0
+                    var cnt : Int = 0
+                    var ind : Int = -1
+                    for(j : Int in (i + 4) until exp.length){
+                        if(exp[j] == ')' && bal == 0){
+                            ind = j
+                            break
+                        }
+                        if(exp[j] == ',' && bal == 0) cnt++
+                        if(exp[j] == '(') bal++
+                        if(exp[j] == ')') bal--
+                    }
+                    if(ind == -1) break
+                    if(cnt > 0) continue
+                    exp = exp.substring(0, ind) + ",2" + exp.substring(ind, exp.length)
+                }
+                Log.d("EngiCalcActivity: ", "tvExpression: ${exp}")
+                val expression = ExpressionBuilder(exp).function(sqrtXY).function(log).function(cot).function(acot).operator(factorial).build()
                 val result = expression.evaluate()
                 val longResult = result.toLong()
                 if(result == longResult.toDouble())
@@ -153,7 +191,14 @@ class EngiCalcActivity : AppCompatActivity() {
                     tvResult.text = ""
                     throw IllegalArgumentException("Bad Argument")
                 }
-
+                tvExpression.text = tvResult.text
+                isDbl = false
+                for(i in (tvExpression.text.length - 1) downTo 0){
+                    if(tvExpression.text[i] == '.'){
+                        isDbl = true
+                        break
+                    } else if(!(tvExpression.text[i] in '0'..'9')) break;
+                }
             } catch (e:Exception){
                 if(isException){
                     tvExpression.text = ""
@@ -161,6 +206,7 @@ class EngiCalcActivity : AppCompatActivity() {
                     isException = false
                 } else{
                     tvExpression.text = "Error"
+                    tvResult.text = ""
                     Log.d("Exception", "message: " + e.message)
                     isException = true
                 }
@@ -175,6 +221,8 @@ class EngiCalcActivity : AppCompatActivity() {
 
     var sqrtXY = object: Function("sqrt", 2){
         override fun apply(vararg args : Double) : Double{
+            Log.d("EngiCalcActivity: ", "SQRT CHECK 1")
+            if(args[1] == 0.0) throw java.lang.IllegalArgumentException("Bad Argument")
             when(args[1]){
                 2.0 -> return Math.sqrt(args[0])
                 3.0 -> return Math.cbrt(args[0])
@@ -186,12 +234,6 @@ class EngiCalcActivity : AppCompatActivity() {
         }
     }
 
-    var sqrt = object: Function("sqrt", 1){
-        override fun apply(vararg args : Double) : Double{
-            if(args[0] < 0) throw IllegalArgumentException("Bad Argument")
-            else return Math.sqrt(args[0])
-        }
-    }
 
     var log = object : Function("log", 2) {
         override fun apply(vararg args: Double): Double {
@@ -201,7 +243,13 @@ class EngiCalcActivity : AppCompatActivity() {
 
     var cot = object : Function("cot",  1){
         override fun apply(vararg args : Double) : Double {
-            return 1 / Math.tan(args[0] * Math.PI / 180)
+            return 1 / Math.tan(args[0] )
+        }
+    }
+
+    var tan = object : Function("tan",  1){
+        override fun apply(vararg args : Double) : Double {
+            return Math.tan(args[0])
         }
     }
 
@@ -244,7 +292,7 @@ class EngiCalcActivity : AppCompatActivity() {
         if(isException)
             return
 
-        if(tvResult.text.isNotEmpty()){
+        /*if(tvResult.text.isNotEmpty()){
             tvExpression.text = ""
             isDbl = false
             if(canClear) {
@@ -264,7 +312,7 @@ class EngiCalcActivity : AppCompatActivity() {
                 tvResult.text = ""
             }
             return
-        }
+        }*/
 
         if(n == 0 && string != "-" && isOper(string))
             return
@@ -321,10 +369,12 @@ class EngiCalcActivity : AppCompatActivity() {
 
         if(n > 0 && tvExpression.text[n - 1] != '!' && isOper(tvExpression.text[n - 1].toString()) && isOper(string)) {
             if(n == 1) return
+            if(tvExpression.text[n - 2] == '(') return
             tvExpression.text = tvExpression.text.substring(0, n - 1)
         }
-        else if(n > 0 && (tvExpression.text[n - 1] == '.' || tvExpression.text[n - 1] == ',' || isOper(tvExpression.text[n - 1].toString())) && !(string in "0".."9")) {
+        else if(n > 0 && tvExpression.text[n - 1] == '.' && !(string in "0".."9")) {
             if (n == 1) return
+            if(tvExpression.text[n - 2] == '(') return
             tvExpression.text = tvExpression.text.substring(0, n - 1)
         }
 
@@ -337,9 +387,67 @@ class EngiCalcActivity : AppCompatActivity() {
             tvResult.text = ""
             tvExpression.append(string)
         }else {
-            tvExpression.append(tvResult.text)
+            //tvExpression.append(tvResult.text)
             tvExpression.append(string)
-            tvResult.text = ""
+            //tvResult.text = ""
         }
+
+        if(string[string.length - 1] == '(') curBal++
+        if(string == ")") curBal--
+
+        reCalc()
+    }
+    fun reCalc(){
+        // Промежуточный результат
+        var exp : String = tvExpression.text.toString()
+        if(exp.length == 0){
+            tvResult.text = ""
+            return
+        }
+        if(exp[exp.length - 1] == '*' || exp[exp.length - 1] == '+' || exp[exp.length - 1] == '-' || exp[exp.length - 1] == '/'){
+            exp = exp.substring(0, exp.length - 1)
+        }
+        if(exp.length == 0){
+            tvResult.text = ""
+            return
+        }
+        if(curBal > 0)
+            for(i in 1..curBal)
+                exp = exp.plus(')')
+        try{
+            for(i : Int in 0 until exp.length){
+                if(exp[i] != 'q') continue
+                var bal : Int = 0
+                var cnt : Int = 0
+                var ind : Int = -1
+                for(j : Int in (i + 4) until exp.length){
+                    if(exp[j] == ')' && bal == 0){
+                        ind = j
+                        break
+                    }
+                    if(exp[j] == ',' && bal == 0) cnt++
+                    if(exp[j] == '(') bal++
+                    if(exp[j] == ')') bal--
+                }
+                if(ind == -1) break
+                if(cnt > 0) continue
+                exp = exp.substring(0, ind) + ",2" + exp.substring(ind, exp.length)
+            }
+            val expression = ExpressionBuilder(exp).function(sqrtXY).function(log).function(cot).function(acot).operator(factorial).build()
+            val result = expression.evaluate()
+            val longResult = result.toLong()
+            var res : String = tvResult.text.toString()
+            if(result == longResult.toDouble())
+                res = longResult.toString()
+            else
+                res = result.toString()
+            if(res == "NaN"){
+                throw IllegalArgumentException("Bad Argument")
+            }
+            tvResult.text = res
+        } catch (e : java.lang.Exception){
+
+        }
+        //
     }
 }

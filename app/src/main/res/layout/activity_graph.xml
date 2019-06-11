@@ -31,13 +31,13 @@
                 <TextView android:id="@+id/tvAddGraph"
                           android:layout_width="230sp"
                           android:layout_height="50sp"
-                          android:text=" ADD GRAPH "
+                          android:text="  ADD GRAPH "
                           android:textColor="@android:color/white"
                           android:textSize="35sp"/>
                 <TextView android:id="@+id/tvSpaceText"
                           android:layout_width="230sp"
                           android:layout_height="40sp"
-                          android:text="    push + and enter the function"
+                          android:text="      push + and enter the function"
                           android:textColor="@android:color/white"
                           android:textSize="15sp"/>
 
@@ -73,19 +73,19 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-                <TextView android:id="@+id/tvY1"
-                          android:layout_width="200sp"
-                          android:layout_height="50sp"
-                          android:text="  1) y = x"
-                          android:textColor="@android:color/white"
-                          android:textSize="30sp"/>
+            <TextView android:id="@+id/tvY1"
+                      android:layout_width="200sp"
+                      android:layout_height="50sp"
+                      android:text="  1) y = x"
+                      android:textColor="@android:color/white"
+                      android:textSize="30sp"/>
 
-                <TextView android:id="@+id/tvY2"
-                          android:layout_width="200sp"
-                          android:layout_height="50sp"
-                          android:text="  2) y = x^2"
-                          android:textColor="@android:color/white"
-                          android:textSize="30sp"/>
+            <TextView android:id="@+id/tvY2"
+                      android:layout_width="200sp"
+                      android:layout_height="50sp"
+                      android:text="  2) y = x^2"
+                      android:textColor="@android:color/white"
+                      android:textSize="30sp"/>
             </LinearLayout>
 
             <LinearLayout
