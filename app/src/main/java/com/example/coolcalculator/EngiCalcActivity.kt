@@ -260,7 +260,6 @@ class EngiCalcActivity : AppCompatActivity() {
     }
 
     var factorial: Operator = object : Operator("!", 1, true, Operator.PRECEDENCE_POWER + 1) {
-
         override fun apply(vararg args: Double): Double {
             val arg = args[0].toInt()
             if (arg.toDouble() != args[0]) {
