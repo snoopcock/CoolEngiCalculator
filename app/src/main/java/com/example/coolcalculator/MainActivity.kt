@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         buttonCalc.setOnClickListener {
             val intent = Intent(this, EngiCalcActivity::class.java)
-            Log.d("MainChecker: ", "Everything fine in MainActivity")
+            Log.d("MainActivity: ", "Everything fine in MainActivity")
             startActivity(intent)
         }
 
