@@ -142,7 +142,7 @@ class EngiCalcActivity : AppCompatActivity() {
         tvEquals.setOnClickListener{
             if(tvExpression.text.isEmpty()) return@setOnClickListener
             try {
-                val expression = ExpressionBuilder(tvExpression.text.toString()).function(sqrtXY).function(sqrt).function(log).function(cot).function(acot).operator(factorial).build()
+                val expression = ExpressionBuilder(tvExpression.text.toString()).function(sqrtXY).function(log).function(cot).function(acot).operator(factorial).build()
                 val result = expression.evaluate()
                 val longResult = result.toLong()
                 if(result == longResult.toDouble())
@@ -323,7 +323,7 @@ class EngiCalcActivity : AppCompatActivity() {
             if(n == 1) return
             tvExpression.text = tvExpression.text.substring(0, n - 1)
         }
-        else if(n > 0 && tvExpression.text[n - 1] == '.' && !(string in "0".."9")) {
+        else if(n > 0 && (tvExpression.text[n - 1] == '.' || tvExpression.text[n - 1] == ',' || isOper(tvExpression.text[n - 1].toString())) && !(string in "0".."9")) {
             if (n == 1) return
             tvExpression.text = tvExpression.text.substring(0, n - 1)
         }

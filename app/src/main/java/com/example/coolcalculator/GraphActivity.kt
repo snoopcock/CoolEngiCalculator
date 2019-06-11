@@ -18,15 +18,22 @@ class   GraphActivity : AppCompatActivity() {
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        var data : List<Pair<Int, Int>> = List(10) { i -> Pair(i, i * i)}
-        var entries : List<Entry> = emptyList()
-        for(i in data)
-            entries = entries.plus(Entry(i.first.toFloat(), i.second.toFloat()))
-        var dataSet : LineDataSet = LineDataSet(entries, "TestObj")
+        var data : List<Pair<Int, Int>> = List(21) { i -> Pair(i - 10, (i - 10) * (i - 10))}
+        var data2 : List<Pair<Int, Int>> = List(21) { i -> Pair(i - 10, -(i - 10) * (i - 10))}
+        var entries1 : List<Entry> = emptyList()
+        var entries2 : List<Entry> = emptyList()
+        for(i in data) {
+            entries1 = entries1.plus(Entry(i.first.toFloat(), i.second.toFloat()))
+        }
+        for(i in data2)
+            entries2 = entries2.plus(Entry(i.first.toFloat(), i.second.toFloat()))
+        var dataSet1 : LineDataSet = LineDataSet(entries1, "TestObject 1")
+        var dataSet2 : LineDataSet = LineDataSet(entries2, "TestObject 2")
+        var dataSets : List<LineDataSet> = ArrayList()
+        dataSets = dataSets.plus(dataSet1)
+        dataSets = dataSets.plus(dataSet2)
 
-        var lineData : LineData = LineData(dataSet)
-        chart.setData(lineData)
-        chart.invalidate()
+        var lineData : LineData = LineData(dataSets)
     }
 
 }
