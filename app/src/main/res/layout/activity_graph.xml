@@ -32,34 +32,44 @@
                 <TextView android:id="@+id/tvAddGraph"
                           android:layout_width="230sp"
                           android:layout_height="50sp"
-                          android:text="  ADD GRAPH "
+                          android:text=" ADD GRAPH"
                           android:textColor="@android:color/white"
                           android:textSize="35sp"/>
+
                 <TextView android:id="@+id/tvSpaceText"
                           android:layout_width="230sp"
                           android:layout_height="40sp"
-                          android:text="      push + and enter the function"
+                          android:text="   push + and enter the function"
                           android:textColor="@android:color/white"
                           android:textSize="15sp"/>
 
             </LinearLayout>
+
             <TextView
-                    android:id="@+id/tvPlusGraph"
+                    android:id="@+id/tvInv0"
+                    style="@style/AppTheme"
+                    android:layout_width="10dp"
+                    android:layout_height="20dp"/>
+
+            <Button
+                    android:id="@+id/buttonPlus"
                     style="@style/GraphButtonStyle"
                     android:layout_width="40dp"
-                    android:layout_height="50dp"
+                    android:layout_height="40dp"
                     android:textSize="25sp"
                     android:text="+"/>
+
             <TextView
                     android:id="@+id/tvInv1"
                     style="@style/AppTheme"
                     android:layout_width="70dp"
-                    android:layout_height="60dp"/>
+                    android:layout_height="40dp"/>
+
             <TextView
                     android:id="@+id/Inv2"
                     style="@style/AppTheme"
                     android:layout_width="70dp"
-                    android:layout_height="60dp"/>
+                    android:layout_height="40dp"/>
 
         </LinearLayout>
 
@@ -74,19 +84,19 @@
                     android:layout_weight="1"
                     android:orientation="vertical">
 
-            <TextView android:id="@+id/tvY1"
-                      android:layout_width="200sp"
-                      android:layout_height="50sp"
-                      android:text="  1) y = x"
-                      android:textColor="@android:color/white"
-                      android:textSize="30sp"/>
+                <TextView android:id="@+id/tvY1"
+                          android:layout_width="200sp"
+                          android:layout_height="50sp"
+                          android:layout_marginLeft="10dp"
+                          android:textColor="@android:color/background_dark"
+                          android:textSize="30sp"/>
 
-            <TextView android:id="@+id/tvY2"
-                      android:layout_width="200sp"
-                      android:layout_height="50sp"
-                      android:text="  2) y = x^2"
-                      android:textColor="@android:color/white"
-                      android:textSize="30sp"/>
+                <TextView android:id="@+id/tvY2"
+                          android:layout_width="200sp"
+                          android:layout_height="50sp"
+                          android:layout_marginLeft="10dp"
+                          android:textColor="@android:color/background_dark"
+                          android:textSize="30sp"/>
             </LinearLayout>
 
             <LinearLayout
@@ -103,25 +113,25 @@
 
                     <TextView
                             android:id="@+id/tvShow1"
-                            style="@style/GraphButtonStyle"
+                            style="@style/NoneGraphButtonStyle"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:textSize="20sp"
                             android:text="Analysis"/>
                     <TextView
-                            android:id="@+id/Inv8"
+                            android:id="@+id/Inv3"
                             style="@style/AppTheme"
                             android:layout_width="20dp"
                             android:layout_height="20dp"/>
                     <TextView
                             android:id="@+id/tvDelete1"
-                            style="@style/GraphButtonStyle"
+                            style="@style/NoneGraphButtonStyle"
                             android:layout_width="30dp"
                             android:layout_height="40dp"
                             android:textSize="20sp"
                             android:text="Delete"/>
                     <TextView
-                            android:id="@+id/Inv9"
+                            android:id="@+id/Inv4"
                             style="@style/AppTheme"
                             android:layout_width="30dp"
                             android:layout_height="20dp"/>
@@ -134,7 +144,107 @@
                         android:orientation="horizontal">
                     <TextView
                             android:id="@+id/tvShow2"
-                            style="@style/GraphButtonStyle"
+                            style="@style/NoneGraphButtonStyle"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:textSize="20sp"
+                            android:text="Analysis"/>
+                    <TextView
+                            android:id="@+id/Inv5"
+                            style="@style/AppTheme"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"/>
+                    <TextView
+                            android:id="@+id/tvDelete2"
+                            style="@style/NoneGraphButtonStyle"
+                            android:layout_width="30dp"
+                            android:layout_height="40dp"
+                            android:textSize="20sp"
+                            android:text="Delete"/>
+                    <TextView
+                            android:id="@+id/Inv6"
+                            style="@style/AppTheme"
+                            android:layout_width="30dp"
+                            android:layout_height="20dp"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                <TextView android:id="@+id/tvY3"
+                          android:layout_width="200sp"
+                          android:layout_height="50sp"
+                          android:layout_marginLeft="10dp"
+                          android:textColor="@android:color/background_dark"
+                          android:textSize="30sp"/>
+
+                <TextView android:id="@+id/tvY4"
+                          android:layout_width="200sp"
+                          android:layout_height="50sp"
+                          android:layout_marginLeft="10dp"
+                          android:textColor="@android:color/background_dark"
+                          android:textSize="30sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                    <TextView
+                            android:id="@+id/tvShow3"
+                            style="@style/NoneGraphButtonStyle"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:textSize="20sp"
+                            android:text="Analysis"/>
+                    <TextView
+                            android:id="@+id/Inv7"
+                            style="@style/AppTheme"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"/>
+                    <TextView
+                            android:id="@+id/tvDelete3"
+                            style="@style/NoneGraphButtonStyle"
+                            android:layout_width="30dp"
+                            android:layout_height="40dp"
+                            android:textSize="20sp"
+                            android:text="Delete"/>
+                    <TextView
+                            android:id="@+id/Inv8"
+                            style="@style/AppTheme"
+                            android:layout_width="30dp"
+                            android:layout_height="20dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+                    <TextView
+                            android:id="@+id/tvShow4"
+                            style="@style/NoneGraphButtonStyle"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
                             android:textSize="20sp"
@@ -145,8 +255,8 @@
                             android:layout_width="20dp"
                             android:layout_height="20dp"/>
                     <TextView
-                            android:id="@+id/tvDelete2"
-                            style="@style/GraphButtonStyle"
+                            android:id="@+id/tvDelete4"
+                            style="@style/NoneGraphButtonStyle"
                             android:layout_width="30dp"
                             android:layout_height="40dp"
                             android:textSize="20sp"
@@ -168,6 +278,60 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:orientation="horizontal">
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                <TextView android:id="@+id/tvY5"
+                          android:layout_width="200sp"
+                          android:layout_height="50sp"
+                          android:layout_marginLeft="10dp"
+                          android:textColor="@android:color/background_dark"
+                          android:textSize="30sp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                    <TextView
+                            android:id="@+id/tvShow5"
+                            style="@style/NoneGraphButtonStyle"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:textSize="20sp"
+                            android:text="Analysis"/>
+                    <TextView
+                            android:id="@+id/Inv12"
+                            style="@style/AppTheme"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"/>
+                    <TextView
+                            android:id="@+id/tvDelete5"
+                            style="@style/NoneGraphButtonStyle"
+                            android:layout_width="30dp"
+                            android:layout_height="40dp"
+                            android:textSize="20sp"
+                            android:text="Delete"/>
+                    <TextView
+                            android:id="@+id/Inv13"
+                            style="@style/AppTheme"
+                            android:layout_width="30dp"
+                            android:layout_height="20dp"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
@@ -182,31 +346,24 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:orientation="horizontal">
-        </LinearLayout>
-
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal">
 
             <TextView
-                    android:id="@+id/Inv3"
+                    android:id="@+id/Inv14"
                     style="@style/AppTheme"
                     android:layout_width="70dp"
                     android:layout_height="60dp"/>
             <TextView
-                    android:id="@+id/Inv4"
+                    android:id="@+id/Inv15"
                     style="@style/AppTheme"
                     android:layout_width="70dp"
                     android:layout_height="60dp"/>
             <TextView
-                    android:id="@+id/Inv5"
+                    android:id="@+id/Inv16"
                     style="@style/AppTheme"
                     android:layout_width="70dp"
                     android:layout_height="60dp"/>
             <TextView
-                    android:id="@+id/Inv6"
+                    android:id="@+id/Inv17"
                     style="@style/AppTheme"
                     android:layout_width="70dp"
                     android:layout_height="60dp"/>
@@ -215,9 +372,9 @@
                     style="@style/GraphButtonStyle"
                     android:layout_width="70dp"
                     android:layout_height="50dp"
-                    android:text="BUILD"/>
+                    android:text="Build"/>
             <TextView
-                    android:id="@+id/Inv7"
+                    android:id="@+id/Inv18"
                     style="@style/AppTheme"
                     android:layout_width="30dp"
                     android:layout_height="60dp"/>

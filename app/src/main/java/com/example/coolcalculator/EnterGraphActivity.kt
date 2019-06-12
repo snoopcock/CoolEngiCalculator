@@ -4,6 +4,12 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_engi_calc.*
 import kotlinx.android.synthetic.main.activity_enter_graph.*
+import android.R.id.edit
+import android.content.Intent
+import android.content.SharedPreferences.Editor
+import android.preference.PreferenceManager
+
+
 
 
 class EnterGraphActivity : AppCompatActivity() {
@@ -33,9 +39,19 @@ class EnterGraphActivity : AppCompatActivity() {
         tvOpen1.setOnClickListener {appendOnFunction("(", false)}
         tvClose1.setOnClickListener {appendOnFunction(")", false)}
         tvX.setOnClickListener {appendOnFunction("x", false)}
+        tvDegree.setOnClickListener {appendOnFunction("^",  false)}
 
-        tvClear1.setOnClickListener{
-            tvFunction.text = ""
+        val s_pref = PreferenceManager.getDefaultSharedPreferences(this)
+        val edit = s_pref.edit()
+        tvEnter.setOnClickListener{
+            edit.putString("textview_text","some text");
+            edit.commit();
+
+            val intent = Intent(this, GraphActivity::class.java)
+            setResult(1, intent)
+
+            //startActivity(intent)
+
         }
 
         tvBack1.setOnClickListener{
@@ -46,6 +62,7 @@ class EnterGraphActivity : AppCompatActivity() {
         }
 
     }
+
 
     fun appendOnFunction(string : String, canClear : Boolean) {
         tvFunction.append(string)

@@ -1,30 +1,34 @@
 package com.example.coolcalculator
 
-import android.content.pm.ActivityInfo
+
+import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.LineData
-import com.github.mikephil.charting.data.LineDataSet
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.activity_graph.*
 
-class   GraphActivity : AppCompatActivity() {
+class GraphActivity : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_graph)
-
-        getSupportActionBar()!!.hide()
-
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-
-        var data : List<Pair<Int, Int>> = List(10) { i -> Pair(i, i * i)}
-        var entries : List<Entry> = emptyList()
-        for(i in data)
-            entries = entries.plus(Entry(i.first.toFloat(), i.second.toFloat()))
-        var dataSet : LineDataSet = LineDataSet(entries, "TestObj")
-
-        var lineData : LineData = LineData(dataSet)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+                              savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.activity_graph, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        buttonPlus.setOnClickListener {
+            val intent = Intent(requireActivity(), EnterGraphActivity::class.java)
+            startActivityForResult(intent, 1)
+
+
+        }
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        print(data)
+    }
 }
+

@@ -3,4 +3,7 @@
     <string name="title_activity_engi_calc">EngiCalcActivity</string>
     <string name="title_activity_graph">GraphActivity</string>
     <string name="title_activity_engi_calc2">EngiCalc2Activity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

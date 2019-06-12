@@ -35,7 +35,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:textColor="@android:color/white"
-                    android:textSize="40sp"/>
+                    android:textSize="40sp"
+                    android:layout_marginTop="2dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -53,9 +54,9 @@
                 android:orientation="horizontal">
 
             <TextView
-                    android:id="@+id/tvClear1"
+                    android:id="@+id/tvDegree"
                     style="@style/NumberButtonStyle"
-                    android:text="CE"/>
+                    android:text="^"/>
             <TextView
                     android:id="@+id/tvOpen1"
                     style="@style/NumberButtonStyle"

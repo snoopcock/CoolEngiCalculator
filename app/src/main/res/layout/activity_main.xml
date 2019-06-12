@@ -9,45 +9,11 @@
         android:background="@color/backgroundMain">
 
 
-    <TextView
-            android:layout_marginTop="260dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="CHOOSE"
-            android:textSize="50dp"
-            android:textColor="@color/textColor"/>
+    <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
 
-    <LinearLayout
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center"
-            android:layout_marginTop="50dp">
-
-
-        <Button android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:text="Calc"
-                android:textSize="15dp"
-                android:layout_marginRight="80dp"
-                android:id="@+id/buttonCalc"/>
-
-        <Button android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:text="graph"
-                android:textSize="15dp"
-                android:id="@+id/buttonGraph"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_gravity="center">
-
-    </LinearLayout>
 </LinearLayout>
 
