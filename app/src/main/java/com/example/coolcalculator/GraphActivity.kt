@@ -23,13 +23,18 @@ class GraphActivity : Fragment() {
         buttonPlus.setOnClickListener {
             if (ch<=3) {
                 buttonPlus.setBackgroundResource(R.color.actionButton)
-                var intent = Intent(requireActivity(), EnterGraphActivity::class.java)
+                val intent = Intent(requireActivity(), EnterGraphActivity::class.java)
                 startActivityForResult(intent, 1)
             } else {
                 buttonPlus.setBackgroundResource(R.color.backgroundMain)
             }
         }
 
+        Build.setOnClickListener {
+            val intent1 = Intent(requireActivity(), build::class.java)
+
+            startActivityForResult(intent1, 1)
+        }
 
 
 
@@ -46,21 +51,21 @@ class GraphActivity : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         var data1 = data
         if ((data1 != null)&&(ch==1)) {
-            tvY1.text = "1) y = ${data1?.getStringExtra("name")}"
+            tvY1.text = "1) y = ${data1.getStringExtra("name")}"
             tvY1.setTextColor(Color.WHITE)
             tvDelete1.setBackgroundResource(R.color.actionButton)
             ch++
             data1 = null
         }
         if ((data1 != null)&&(ch==2)) {
-            tvY2.text = "2) y = ${data1?.getStringExtra("name")}"
+            tvY2.text = "2) y = ${data1.getStringExtra("name")}"
             tvY2.setTextColor(Color.WHITE)
             tvDelete2.setBackgroundResource(R.color.actionButton)
             ch++
             data1 = null
         }
         if ((data1 != null)&&(ch==3)) {
-            tvY3.text = "3) y = ${data1?.getStringExtra("name")}"
+            tvY3.text = "3) y = ${data1.getStringExtra("name")}"
             tvY3.setTextColor(Color.WHITE)
             tvDelete3.setBackgroundResource(R.color.actionButton)
             ch++

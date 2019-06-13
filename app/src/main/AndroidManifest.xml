@@ -7,9 +7,14 @@
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
+            android:screenOrientation="portrait"
             android:supportsRtl="true"
-            android:theme="@style/AppTheme"
-            android:screenOrientation="portrait">
+            android:theme="@style/AppTheme">
+        <activity
+                android:name=".build"
+                android:label="@string/title_activity_build"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <activity android:name=".EnterGraphActivity">
         </activity>
         <activity android:name=".MainActivity">
