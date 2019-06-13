@@ -31,13 +31,23 @@ class GraphActivity : Fragment() {
         }
 
         Build.setOnClickListener {
-            val intent1 = Intent(requireActivity(), build::class.java)
-
-            startActivityForResult(intent1, 1)
+            if (ch>=2) {
+                val intent1 = Intent(requireActivity(), build::class.java)
+                startActivity(intent1)
+            }
         }
 
-
-
+        tvDelete1.setOnClickListener() {
+            tvY1.text = ""
+            tvY1.setTextColor(Color.BLACK)
+            tvDelete1.setBackgroundResource(R.color.backgroundMain)
+            ch = ch - 1
+            if (ch>=2) {
+                Build.setBackgroundResource(R.color.actionButton)
+            } else {
+                Build.setBackgroundResource(R.color.backgroundMain)
+            }
+        }
     }
 
     override fun onResume() {
@@ -70,6 +80,11 @@ class GraphActivity : Fragment() {
             tvDelete3.setBackgroundResource(R.color.actionButton)
             ch++
             data1 = null
+        }
+        if (ch>=2) {
+            Build.setBackgroundResource(R.color.actionButton)
+        } else {
+            Build.setBackgroundResource(R.color.backgroundMain)
         }
     }
 }
