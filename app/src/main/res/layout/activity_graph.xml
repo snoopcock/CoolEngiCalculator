@@ -111,13 +111,7 @@
                         android:layout_weight="1"
                         android:orientation="horizontal">
 
-                    <TextView
-                            android:id="@+id/tvShow1"
-                            style="@style/NoneGraphButtonStyle"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:textSize="20sp"
-                            android:text="Analysis"/>
+
                     <TextView
                             android:id="@+id/Inv3"
                             style="@style/AppTheme"
@@ -142,13 +136,7 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:orientation="horizontal">
-                    <TextView
-                            android:id="@+id/tvShow2"
-                            style="@style/NoneGraphButtonStyle"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:textSize="20sp"
-                            android:text="Analysis"/>
+
                     <TextView
                             android:id="@+id/Inv5"
                             style="@style/AppTheme"
@@ -212,13 +200,6 @@
                         android:orientation="horizontal">
 
                     <TextView
-                            android:id="@+id/tvShow3"
-                            style="@style/NoneGraphButtonStyle"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:textSize="20sp"
-                            android:text="Analysis"/>
-                    <TextView
                             android:id="@+id/Inv7"
                             style="@style/AppTheme"
                             android:layout_width="20dp"
@@ -242,13 +223,6 @@
                         android:layout_height="0dp"
                         android:layout_weight="1"
                         android:orientation="horizontal">
-                    <TextView
-                            android:id="@+id/tvShow4"
-                            style="@style/NoneGraphButtonStyle"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:textSize="20sp"
-                            android:text="Analysis"/>
                     <TextView
                             android:id="@+id/Inv10"
                             style="@style/AppTheme"
@@ -304,13 +278,6 @@
                         android:layout_weight="1"
                         android:orientation="horizontal">
 
-                    <TextView
-                            android:id="@+id/tvShow5"
-                            style="@style/NoneGraphButtonStyle"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:textSize="20sp"
-                            android:text="Analysis"/>
                     <TextView
                             android:id="@+id/Inv12"
                             style="@style/AppTheme"

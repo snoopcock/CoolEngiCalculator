@@ -1,6 +1,7 @@
 package com.example.coolcalculator
 
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,8 +16,8 @@ class Menu : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_menu, container, false)
-    }
 
+    }
 
 
 }

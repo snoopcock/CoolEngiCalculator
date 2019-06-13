@@ -2,13 +2,8 @@ package com.example.coolcalculator
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_engi_calc.*
 import kotlinx.android.synthetic.main.activity_enter_graph.*
-import android.R.id.edit
 import android.content.Intent
-import android.content.SharedPreferences.Editor
-import android.preference.PreferenceManager
-
 
 
 
@@ -41,17 +36,15 @@ class EnterGraphActivity : AppCompatActivity() {
         tvX.setOnClickListener {appendOnFunction("x", false)}
         tvDegree.setOnClickListener {appendOnFunction("^",  false)}
 
-        val s_pref = PreferenceManager.getDefaultSharedPreferences(this)
-        val edit = s_pref.edit()
         tvEnter.setOnClickListener{
-            edit.putString("textview_text","some text");
-            edit.commit();
+
 
             val intent = Intent(this, GraphActivity::class.java)
+
+            intent.putExtra("name", tvFunction.text.toString())
+
             setResult(1, intent)
-
-            //startActivity(intent)
-
+            this.finish()
         }
 
         tvBack1.setOnClickListener{
@@ -60,9 +53,7 @@ class EnterGraphActivity : AppCompatActivity() {
                 tvFunction.text = string.substring(0, string.length-1)
             }
         }
-
     }
-
 
     fun appendOnFunction(string : String, canClear : Boolean) {
         tvFunction.append(string)

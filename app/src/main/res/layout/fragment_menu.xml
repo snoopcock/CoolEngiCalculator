@@ -1,14 +1,96 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="com.example.coolcalculator.Menu">
-
-    <ImageView
+<LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:background="@color/backgroundMain">
+    <LinearLayout
+            android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:src="@drawable/menu"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-    />
+            android:orientation="horizontal"
+            android:layout_weight="1"/>
 
-</FrameLayout>
+    <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1"/>
+
+    <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:textColor="#C8C8C8">
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SWIPE "
+                android:gravity="center"
+                android:textColor="@android:color/white"
+                android:textSize="50dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1"/>
+
+    <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:gravity="bottom">
+        <TextView
+                android:layout_width="wrap_content"
+                android:text="CALC"
+                android:textSize="35dp"
+                android:textColor="@android:color/white"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"/>
+
+        <ImageView android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_weight="1"/>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:text="GRAPH"
+                android:textSize="35dp"
+                android:textColor="@android:color/white"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="1"
+            android:layout_gravity="center">
+        <ImageView
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:scaleType="fitXY"
+                android:layout_gravity="right"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/arl"/>
+
+        <ImageView android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+        <ImageView
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:scaleType="fitXY"
+                android:layout_gravity="right"
+                android:src="@drawable/ar1"
+                android:layout_marginRight="20dp"/>
+    </LinearLayout>
+
+
+
+</LinearLayout>

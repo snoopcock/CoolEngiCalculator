@@ -1,17 +1,11 @@
 package com.example.coolcalculator
 
-import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -33,6 +27,18 @@ class MainActivity : AppCompatActivity() {
         adapter.addFragment(GraphActivity())
         (viewPager as ViewPager).adapter = adapter
         viewPager.setCurrentItem(1)
+
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+
+        viewPager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
+            override fun onPageSelected(position: Int) {
+                when (position) {
+                    0 -> requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
+                    1 -> requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+                    2 -> requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+                }
+            }
+        })
     }
 
     class MyViewPagerAdapter(manager: FragmentManager) : FragmentPagerAdapter(manager){

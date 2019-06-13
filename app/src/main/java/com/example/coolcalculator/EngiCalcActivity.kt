@@ -1,5 +1,6 @@
 package com.example.coolcalculator
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -21,6 +22,7 @@ class EngiCalcActivity : Fragment() {
                               savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.activity_engi_calc, container, false)
     }
+
 
 
 
